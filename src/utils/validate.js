@@ -1,10 +1,16 @@
+const emailRegexp = /\S+@\S+\.\S+/;
+const passwordRegexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
 export default function isFormValid({ email, password }) {
-  let errors = {};
-  if (!email || !/\S+@\S+\.\S+/.test(email)) {
+  const errors = {};
+
+  if (!email || !emailRegexp.test(email)) {
     errors.email = "Invalid email";
   }
-  if (!password || !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)) {
+
+  if (!password || !passwordRegexp.test(password)) {
     errors.password = "Invalid password";
   }
+
   return errors;
 }
